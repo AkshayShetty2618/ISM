@@ -41,10 +41,23 @@ class preprocessing:
         r, g, b = cv2.split(img)
         hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
         h, s, v = cv2.split(hsv)
-        light_orange = (1, 100, 170)
+
+        light_red = (0, 180, 180)
+        dark_red = (10, 250, 255)
+        light_orange = (10, 150, 200)
         dark_orange = (18, 255, 255)
-        light_blue = (50, 50, 75)
-        dark_blue = (150, 250, 250)
+        light_yellow = (18, 60, 140)
+        dark_yellow = (30, 250, 255)
+
+        light_green = (52, 75, 80)
+        dark_green = (80, 255, 255)
+
+        light_blue = (85, 50, 75)
+        dark_blue = (125, 250, 255)
+
+        light_ink = (105, 1, 50)
+        dark_ink = (175, 220, 255)
+
         m = img.shape[0]
         n = img.shape[1]
         template = np.ones((m, n))
@@ -66,18 +79,47 @@ class preprocessing:
         gn = template * g_max
         bn = template * b_max
         skin = np.dstack([rn, gn, bn])
-        mask = cv2.inRange(hsv, light_orange, dark_orange)
-        mask1 = cv2.inRange(hsv, light_blue, dark_blue)
-        masker = cv2.bitwise_not(mask)
-        m1 = cv2.bitwise_not(mask1)
+        
+        orange_mask = cv2.inRange(hsv, light_orange, dark_orange)
+        red_mask = cv2.inRange(hsv, light_red, dark_red)
+        yellow_mask = cv2.inRange(hsv, light_yellow, dark_yellow)
+        green_mask = cv2.inRange(hsv, light_green, dark_green)
+        blue_mask = cv2.inRange(hsv, light_blue, dark_blue)
+        ink_mask = cv2.inRange(hsv, light_ink, dark_ink)
+        # Creates a Black mask for the colored region
+        om = cv2.bitwise_not(orange_mask)
+        rm = cv2.bitwise_not(red_mask)
+        ym = cv2.bitwise_not(yellow_mask)
+        gm = cv2.bitwise_not(green_mask)
+        bm = cv2.bitwise_not(blue_mask)
+        im = cv2.bitwise_not(ink_mask)
+        # Extracts a SkinPatch in the color pattern
+        skinPatch = cv2.bitwise_and(skin, skin, mask=orange_mask)
+        spr = cv2.bitwise_and(skin, skin, mask=red_mask)
+        spy = cv2.bitwise_and(skin, skin, mask=yellow_mask)
+        spg = cv2.bitwise_and(skin, skin, mask=green_mask)
+        spb = cv2.bitwise_and(skin, skin, mask=blue_mask)
+        spi = cv2.bitwise_and(skin, skin, mask=ink_mask)
 
-        # replace the sticker with black
-        imnew = cv2.bitwise_and(img, img, mask=masker)
-        imnew = cv2.bitwise_and(imnew, imnew, mask=m1)
-        skinPatch = cv2.bitwise_and(skin, skin, mask=mask)
-        skinPatch1 = cv2.bitwise_and(skin, skin, mask=mask1)
+        # replaces the Color pixel with black and then with the skin color
+        imnew = cv2.bitwise_and(img, img, mask=om)
         rst = cv2.add(imnew, skinPatch, dtype=cv2.CV_8UC1)
-        rst = cv2.add(rst, skinPatch1, dtype=cv2.CV_8UC1)
+
+        rst = cv2.bitwise_and(rst, rst, mask=rm)
+        rst = cv2.add(rst, spr, dtype=cv2.CV_8UC1)
+
+        rst = cv2.bitwise_and(rst, rst, mask=ym)
+        rst = cv2.add(rst, spy, dtype=cv2.CV_8UC1)
+
+        rst = cv2.bitwise_and(rst, rst, mask=gm)
+        rst = cv2.add(rst, spg, dtype=cv2.CV_8UC1)
+
+        rst = cv2.bitwise_and(rst, rst, mask=bm)
+        rst = cv2.add(rst, spb, dtype=cv2.CV_8UC1)
+
+        rst = cv2.bitwise_and(rst, rst, mask=im)
+        rst = cv2.add(rst, spi, dtype=cv2.CV_8UC1)
+
         rst = rst.astype(np.uint8)
 
         return rst
