@@ -8,6 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib import colors
 from matplotlib.colors import hsv_to_rgb
+from numpy import asarray
 
 class preprocessing:
 
@@ -269,7 +270,10 @@ if __name__ == '__main__':
     km = pre.apply_kmeans(med)
     hsv, lab, enh = pre.apply_AHE(km)
     grab_img = pre.grabcut_mask(image ,enh)
+    npy = asarray(grab_img)
+    np.save('final_npy',npy)
 
-    together =cv2.hconcat([image, grab_img])
+    '''together =cv2.hconcat([image, grab_img])
     cv2.imshow("Final", together)
-    cv2.waitKey(0)
+    cv2.waitKey(0)'''
+    
