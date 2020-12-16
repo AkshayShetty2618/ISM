@@ -2,28 +2,42 @@ import pandas as pd
 import cv2
 import os
 import numpy as np
+from sklearn.svm import SVC
 from pathlib import Path
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
-from matplotlib import colors
 from matplotlib.colors import hsv_to_rgb
 from numpy import asarray
 
 class preprocessing:
 
     def __init__(self):
-        self.path = Path("C:/Users/Vicky/Desktop")
-        self.csv_path = os.path.join(self.path, "TUHH\ISM\Files")
-        self.csv_name = "groundtruth_train"
-        self.image_path = os.path.join(self.csv_path, "ISIC_2019_Training_Input")
-        self.listdir = os.listdir(self.image_path)
-        self.images = []
-        for file in self.listdir:
-            if file != 'ATTRIBUTION.txt':
-                self.images.append(file)
-        # self.img = cv2.resize(cv2.imread(os.path.join(self.image_path, self.images[50])), dsize=(700,700))
-        self.img = cv2.resize(cv2.imread(os.path.join(self.image_path, 'ISIC_0000999_downsampled.jpg')), dsize=(700,700))
+        train_data = pd.read_csv(r'F:\TUhh\Sem 5\Project\ISIC_2019_Training_GroundTruth.csv', index_col=False)
+        im_path = r'F:\TUhh\Sem 5\Project\ISIC_2019_Training_Input\ISIC_2019_Training_Input'
+        imageName_set = train_data['image']
+        train_data = train_data.drop(['image'], axis=1)
+        Y_labels = []
+        X_set = []
+        for i in range(imageName_set.shape[0]):
+            image_path = os.path.join(im_path, imageName_set[i] + '.jpg')
+            image = plt.imread(image_path)
+            try:
+                premask = self.apply_discmasking(image)
+                dst = self.apply_dullrazor(premask)
+                med = self.median_filter(dst)
+                km = self.apply_kmeans(med)
+                hsv, lab, enh = self.apply_AHE(km)
+                grab_img = self.grabcut_mask(image, enh)
+            except:
+                grab_img = image
+
+
+            X_set.append(grab_img)
+            Y_labels.append(train_data.iloc[i].values)
+
+        self.X_set = np.array(X_set)
+        self.Y_labels = np.array(Y_labels)
 
     def read_csvs(self):
         self.train_csv = pd.read_csv(self.csv_name)
@@ -36,6 +50,10 @@ class preprocessing:
     def median_filter(self, image):
         median = cv2.medianBlur(image, 5)
         return median
+    def svm_classifier(self,train,lables):
+        SVC_classifier = SVC(C=10.0, gamma=0.05)
+        SVC_classifier.fit(train, lables)
+        #svc_preds = SVC_classifier.predict(scaled_test)
 
     def apply_discmasking(self, image):
         img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -207,25 +225,25 @@ class preprocessing:
             dim = cv2.grabCut(image, new_mask, None, bgdModel, fgdModel, 5, cv2.GC_INIT_WITH_MASK)
             mask2 = np.where((new_mask == 2) | (new_mask == 0), 0, 1).astype('uint8')
             GrabCut_img = image * mask2[:, :, np.newaxis]
-            cv2.imshow("Grab img", GrabCut_img)
-            cv2.waitKey(0)
+            #cv2.imshow("Grab img", GrabCut_img)
+            #cv2.waitKey(0)
         else:
             s = (int(image.shape[0] / 10), int(image.shape[1] / 10))
             rect = (s[0], s[1], int(image.shape[0] - (3 / 10) * s[0]), image.shape[1] - s[1])
             cv2.grabCut(enhancedimg, new_mask, rect, bgdModel, fgdModel, 10, cv2.GC_INIT_WITH_RECT)
             mask2 = np.where((mask == 2) | (mask == 0), 0, 1).astype('uint8')
             GrabCut_img = image * mask2[:, :, np.newaxis]
-            cv2.imshow("Grab img", GrabCut_img)
-            cv2.waitKey(0)
+            #cv2.imshow("Grab img", GrabCut_img)
+            #cv2.waitKey(0)
 
-            plt.imshow(GrabCut_img)
-            plt.colorbar()
-            plt.show()
+            #plt.imshow(GrabCut_img)
+            #plt.colorbar()
+            #plt.show()
 
         imgmask = cv2.medianBlur(GrabCut_img, 5)
         ret, Segmented_mask = cv2.threshold(imgmask, 0, 255, cv2.THRESH_BINARY)
-        cv2.imshow("Seg Image", Segmented_mask)
-        cv2.waitKey(0)
+        #cv2.imshow("Seg Image", Segmented_mask)
+        #cv2.waitKey(0)
 
         if (np.sum(inv_mask[:]) < 80039400):
             newmask = inv_mask
@@ -234,46 +252,26 @@ class preprocessing:
             dim = cv2.grabCut(image, new_mask, None, bgdModel, fgdModel, 5, cv2.GC_INIT_WITH_MASK)
             mask2 = np.where((new_mask == 2) | (new_mask == 0), 0, 1).astype('uint8')
             GrabCut_img2 = image * mask2[:, :, np.newaxis]
-            cv2.imshow("Grab img", GrabCut_img)
-            cv2.waitKey(0)
+            #cv2.imshow("Grab img", GrabCut_img)
+            #cv2.waitKey(0)
         else:
             s = (int(image.shape[0] / 10), int(image.shape[1] / 10))
             rect = (s[0], s[1], int(image.shape[0] - (3 / 10) * s[0]), image.shape[1] - s[1])
             cv2.grabCut(enhancedimg, new_mask, rect, bgdModel, fgdModel, 10, cv2.GC_INIT_WITH_RECT)
             mask2 = np.where((mask == 2) | (mask == 0), 0, 1).astype('uint8')
             GrabCut_img2 = image * mask2[:, :, np.newaxis]
-            cv2.imshow("Grab img", GrabCut_img)
-            cv2.waitKey(0)
+            #cv2.imshow("Grab img", GrabCut_img)
+            #cv2.waitKey(0)
 
         imgmask2 = cv2.medianBlur(GrabCut_img2, 5)
         ret, Segmented_mask2 = cv2.threshold(imgmask2, 0, 255, cv2.THRESH_BINARY)
-        plt.imshow(GrabCut_img2)
-        plt.colorbar()
-        plt.show()
+        #plt.imshow(GrabCut_img2)
+        #plt.colorbar()
+        #plt.show()
 
         return GrabCut_img2
     
 if __name__ == '__main__':
     pre = preprocessing()
-    image = pre.img
-    # cv2.imshow("img", image)
-    # cv2.waitKey(0)
-    premask = pre.apply_discmasking(image)
-    # cv2.imshow("Premask", premask)
-    # cv2.waitKey(0)
-    dst = pre.apply_dullrazor(premask)
-    # cv2.imshow("Dull Razor", dst)
-    # cv2.waitKey(0)
-    med = pre.median_filter(dst)
-    # cv2.imshow("median", med)
-    # cv2.waitKey(0)
-    km = pre.apply_kmeans(med)
-    hsv, lab, enh = pre.apply_AHE(km)
-    grab_img = pre.grabcut_mask(image ,enh)
-    npy = asarray(grab_img)
-    np.save('final_npy',npy)
-
-    '''together =cv2.hconcat([image, grab_img])
-    cv2.imshow("Final", together)
-    cv2.waitKey(0)'''
-    
+    X_train = pre.X_set
+    Y_train = pre.Y_labels
