@@ -19,6 +19,8 @@ class preprocessing:
         train_data = train_data.drop(['image'], axis=1)
         Y_labels = []
         X_set = []
+        train_final = []
+        x = 0
         for i in range(imageName_set.shape[0]):
             image_path = os.path.join(im_path, imageName_set[i] + '.jpg')
             image = plt.imread(image_path)
@@ -32,12 +34,17 @@ class preprocessing:
             except:
                 grab_img = image
 
-
-            X_set.append(grab_img)
+            X_set.append(np.array(grab_img).flatten())
             Y_labels.append(train_data.iloc[i].values)
+            x += 1
+            if x % 100 == 0:
+                print("Total " + str(x) + "/" + str(imageName_set.shape[0] - 1) + " images processed.!!")
+            train_final.append([X_set, Y_labels])
 
         self.X_set = np.array(X_set)
         self.Y_labels = np.array(Y_labels)
+
+        np.save("train.npy", train_final)
 
     def read_csvs(self):
         self.train_csv = pd.read_csv(self.csv_name)
