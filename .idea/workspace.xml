@@ -7,6 +7,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -64,84 +71,112 @@
       <screen x="-1440" y="0" width="1440" height="860" />
     </state>
     <state x="-811" y="262" key="FileChooserDialogImpl/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608141720488" />
-    <state width="1515" height="181" key="GridCell.Tab.0.bottom" timestamp="1608150976183">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="190" key="GridCell.Tab.0.bottom" timestamp="1608299931436">
+      <screen x="-1440" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.0.bottom/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608145454311" />
+    <state width="1419" height="190" key="GridCell.Tab.0.bottom/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608299931436" />
     <state width="1515" height="181" key="GridCell.Tab.0.bottom/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608150976183" />
-    <state width="1515" height="181" key="GridCell.Tab.0.center" timestamp="1608150976183">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="190" key="GridCell.Tab.0.center" timestamp="1608299931435">
+      <screen x="-1440" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.0.center/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608145454311" />
+    <state width="1419" height="190" key="GridCell.Tab.0.center/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608299931435" />
     <state width="1515" height="181" key="GridCell.Tab.0.center/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608150976183" />
-    <state width="1515" height="181" key="GridCell.Tab.0.left" timestamp="1608150976183">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="190" key="GridCell.Tab.0.left" timestamp="1608299931434">
+      <screen x="-1440" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.0.left/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608145454311" />
+    <state width="1419" height="190" key="GridCell.Tab.0.left/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608299931434" />
     <state width="1515" height="181" key="GridCell.Tab.0.left/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608150976183" />
-    <state width="1515" height="181" key="GridCell.Tab.0.right" timestamp="1608150976183">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="190" key="GridCell.Tab.0.right" timestamp="1608299931436">
+      <screen x="-1440" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.0.right/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608145454311" />
+    <state width="1419" height="190" key="GridCell.Tab.0.right/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608299931436" />
     <state width="1515" height="181" key="GridCell.Tab.0.right/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608150976183" />
-    <state width="1515" height="181" key="GridCell.Tab.1.bottom" timestamp="1608150980031">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="190" key="GridCell.Tab.1.bottom" timestamp="1608299931438">
+      <screen x="-1440" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.1.bottom/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608145456604" />
+    <state width="1419" height="190" key="GridCell.Tab.1.bottom/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608299931438" />
     <state width="1515" height="181" key="GridCell.Tab.1.bottom/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608150980031" />
-    <state width="1515" height="181" key="GridCell.Tab.1.center" timestamp="1608150980031">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="190" key="GridCell.Tab.1.center" timestamp="1608299931436">
+      <screen x="-1440" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.1.center/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608145456604" />
+    <state width="1419" height="190" key="GridCell.Tab.1.center/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608299931436" />
     <state width="1515" height="181" key="GridCell.Tab.1.center/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608150980031" />
-    <state width="1515" height="181" key="GridCell.Tab.1.left" timestamp="1608150980031">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="190" key="GridCell.Tab.1.left" timestamp="1608299931436">
+      <screen x="-1440" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.1.left/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608145456603" />
+    <state width="1419" height="190" key="GridCell.Tab.1.left/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608299931436" />
     <state width="1515" height="181" key="GridCell.Tab.1.left/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608150980031" />
-    <state width="1515" height="181" key="GridCell.Tab.1.right" timestamp="1608150980031">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="190" key="GridCell.Tab.1.right" timestamp="1608299931437">
+      <screen x="-1440" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.1.right/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608145456604" />
+    <state width="1419" height="190" key="GridCell.Tab.1.right/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608299931437" />
     <state width="1515" height="181" key="GridCell.Tab.1.right/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608150980031" />
-    <state x="266" y="80" key="SettingsEditor" timestamp="1608147616293">
+    <state x="-1191" y="83" key="SettingsEditor" timestamp="1608287184693">
+      <screen x="-1440" y="0" width="1440" height="860" />
+    </state>
+    <state x="-1191" y="83" key="SettingsEditor/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608287184693" />
+    <state x="266" y="80" key="SettingsEditor/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608147616293" />
+    <state x="74" y="12" width="1220" height="847" maximized="true" key="dock-window-1" timestamp="1608290132014">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="-1191" y="83" key="SettingsEditor/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608142513227" />
-    <state x="266" y="80" key="SettingsEditor/0.0.1536.824/-1440.0.1440.860@0.0.1536.824" timestamp="1608147616293" />
+    <state x="74" y="12" width="1220" height="847" maximized="true" key="dock-window-1/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608290132014" />
+    <state x="-1057" y="180" key="search.everywhere.popup" timestamp="1608202252855">
+      <screen x="-1440" y="0" width="1440" height="860" />
+    </state>
+    <state x="-1057" y="180" key="search.everywhere.popup/0.0.1536.824/-1440.0.1440.860@-1440.0.1440.860" timestamp="1608202252855" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Preprocessing.py</url>
-          <line>15</line>
+          <line>22</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Preprocessing.py</url>
-          <line>275</line>
-          <option name="timeStamp" value="4" />
+          <line>47</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Preprocessing.py</url>
-          <line>276</line>
-          <option name="timeStamp" value="5" />
+          <line>285</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Preprocessing.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="17" />
+          <line>46</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Preprocessing.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="18" />
+          <line>40</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Preprocessing.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="21" />
+          <line>289</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Preprocessing.py</url>
+          <line>290</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Preprocessing.py</url>
+          <line>291</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Preprocessing.py</url>
+          <line>292</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Preprocessing.py</url>
+          <line>293</line>
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -149,6 +184,7 @@
       <configuration name="PythonConfigurationType">
         <watch expression="image_path" />
         <watch expression="i" />
+        <watch expression="flat_features" />
       </configuration>
     </watches-manager>
   </component>

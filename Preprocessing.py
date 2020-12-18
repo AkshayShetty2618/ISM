@@ -3,12 +3,19 @@ import cv2
 import os
 import numpy as np
 from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from skimage.feature import hog
+from numpy import genfromtxt
+import pickle
 from pathlib import Path
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib.colors import hsv_to_rgb
 from numpy import asarray
+from SVM_Classifier import *
 
 class preprocessing:
 
@@ -21,35 +28,34 @@ class preprocessing:
         X_set = []
         for i in range(imageName_set.shape[0]):
             image_path = os.path.join(im_path, imageName_set[i] + '.jpg')
-            image = plt.imread(image_path)
+            image = cv2.imread(image_path)
+            image = cv2.resize(image, (620, 620))
             try:
                 premask = self.apply_discmasking(image)
                 dst = self.apply_dullrazor(premask)
                 med = self.median_filter(dst)
-                km = self.apply_kmeans(med)
-                hsv, lab, enh = self.apply_AHE(km)
-                grab_img = self.grabcut_mask(image, enh)
+                gray = cv2.cvtColor(med, cv2.COLOR_RGB2GRAY)
+                hog_features = hog(gray, block_norm='L2-Hys', pixels_per_cell=(16, 16))
+                flat_features = np.hstack(hog_features)
             except:
-                grab_img = image
+                continue
 
-
-            X_set.append(grab_img)
-            Y_labels.append(train_data.iloc[i].values)
+            X_set.append(flat_features)
+            ind_lab = train_data.iloc[i].values
+            Y_labels.append((np.where(ind_lab==1))[0][0])
 
         self.X_set = np.array(X_set)
         self.Y_labels = np.array(Y_labels)
 
-    def read_csvs(self):
-        self.train_csv = pd.read_csv(self.csv_name)
-        self.test_csv = pd.read_csv(os.path.join(self.csv_path, "groundtruth_val"))
-
-    def convert_togray(self, image):
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        return gray
-
     def median_filter(self, image):
         median = cv2.medianBlur(image, 5)
         return median
+
+    def segmentation(self, image):
+        gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+        ret, thresh = cv2.threshold(gray, 140, 255, cv2.THRESH_BINARY)
+        return thresh
+
     def svm_classifier(self,train,lables):
         SVC_classifier = SVC(C=10.0, gamma=0.05)
         SVC_classifier.fit(train, lables)
@@ -74,8 +80,8 @@ class preprocessing:
         light_blue = (85, 50, 75)
         dark_blue = (125, 250, 255)
 
-        light_ink = (105, 1, 50)
-        dark_ink = (175, 220, 255)
+        light_ink = (100, 1, 50)
+        dark_ink = (140, 220, 255)
 
         m = img.shape[0]
         n = img.shape[1]
@@ -272,6 +278,17 @@ class preprocessing:
         return GrabCut_img2
     
 if __name__ == '__main__':
-    pre = preprocessing()
-    X_train = pre.X_set
-    Y_train = pre.Y_labels
+    trainSetPath = r'F:\TUhh\Sem 5\Project\input.csv'
+    labelSetPath = r'F:\TUhh\Sem 5\Project\label.csv'
+    modelPath = r'F:\TUhh\Sem 5\Project\svm_model.sav'
+
+    if os.path.isfile(trainSetPath)==False:
+        pre = preprocessing()
+        X_train = pre.X_set
+        Y_train = pre.Y_labels
+        svmTrain = SVM_Classify()
+        svmTrain.formatInputData(X_train)
+        svmTrain.formatLabels(Y_train)
+        svmTrain.saveTrainData(trainSetPath, labelSetPath)
+        svmTrain.loadTrainData(trainSetPath, labelSetPath)
+        svmTrain.trainModel(modelPath)
