@@ -29,12 +29,12 @@ class preprocessing:
         for i in range(imageName_set.shape[0]):
             image_path = os.path.join(im_path, imageName_set[i] + '.jpg')
             image = cv2.imread(image_path)
-            image = cv2.resize(image, (620, 620))
             try:
-                premask = self.apply_discmasking(image)
-                dst = self.apply_dullrazor(premask)
+                #premask = self.apply_discmasking(image)
+                dst = self.apply_dullrazor(image)
                 med = self.median_filter(dst)
                 gray = cv2.cvtColor(med, cv2.COLOR_RGB2GRAY)
+                gray = cv2.resize(gray, (620, 620))
                 hog_features = hog(gray, block_norm='L2-Hys', pixels_per_cell=(16, 16))
                 flat_features = np.hstack(hog_features)
             except:
@@ -281,14 +281,15 @@ if __name__ == '__main__':
     trainSetPath = r'F:\TUhh\Sem 5\Project\input.csv'
     labelSetPath = r'F:\TUhh\Sem 5\Project\label.csv'
     modelPath = r'F:\TUhh\Sem 5\Project\svm_model.sav'
-
+    svmTrain = SVM_Classify()
     if os.path.isfile(trainSetPath)==False:
         pre = preprocessing()
         X_train = pre.X_set
         Y_train = pre.Y_labels
-        svmTrain = SVM_Classify()
+
         svmTrain.formatInputData(X_train)
         svmTrain.formatLabels(Y_train)
-        svmTrain.saveTrainData(trainSetPath, labelSetPath)
-        svmTrain.loadTrainData(trainSetPath, labelSetPath)
-        svmTrain.trainModel(modelPath)
+        svmTrain.saveTrainData(trainSetPath, Y_train)
+
+    svmTrain.loadTrainData(trainSetPath, labelSetPath)
+    svmTrain.trainModel(modelPath)

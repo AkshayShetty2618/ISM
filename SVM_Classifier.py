@@ -19,16 +19,18 @@ class SVM_Classify:
         self.X = pd.DataFrame(X_pcs)
 
     def formatLabels(self, labels):
-        self.y = pd.Series(labels)
+        #self.y = pd.Series(labels)
+        self.y = labels
 
     def saveTrainData(self, inputPath, labelPath):
         self.X.to_csv(inputPath, index=False)
-        # np.savetxt(r'F:\TUhh\Sem 5\Project\label.csv',Y_labels, delimiter=",")
-        self.y.to_csv(labelPath, index=False)
+        np.savetxt(labelPath, self.y, delimiter=",")
+        #self.y.to_csv(labelPath, index=False)
 
     def loadTrainData(self, inputPath, labelPath):
-        self.X_train = pd.read_csv(inputPath, index_col=False)
+        #self.y_train = pd.read_csv(labelPath, index_col=False)
         self.y_train = genfromtxt(labelPath, delimiter=",")
+        self.X_train = pd.read_csv(inputPath, index_col=False)
 
     def trainModel(self, modelPath):
         SVC_classifier = SVC(C=10.0, gamma=0.05)
